@@ -345,7 +345,6 @@ products to delete → Hodor DELETE → Aerospike + PostgreSQL
 - Batched: 50 IDs per Hodor DELETE call
 - Redis snapshot set is updated atomically after deletion
 
-> **Known bug:** Hodor's Aerospike delete code uses hardcoded set name `"V1"` instead of `{siteKey}_V1` or `{siteKey}_V2`, meaning Aerospike records may not actually be deleted if the active version is V2.
 
 ---
 
@@ -362,3 +361,18 @@ products to delete → Hodor DELETE → Aerospike + PostgreSQL
 | **Redis (Hodor)** | Hodor | Query + detail cache; cleared by Deadpool post-run |
 | **Aerospike** | Hodor | Fast product detail reads (blue/green sets) |
 | **PostgreSQL** | Hodor | Filterable catalog queries |
+
+
+## Useful APIs
+
+To trigger manually recs-feed insert has to be done from mozart
+
+```curl
+curl -vX PATCH "mozart.pilot-rc-unbxd.infra/v2.1/sites/ss-unbxd-gus-Prod-SorteOnline34971743684587/indexes/snapshot/rebuild"
+```
+
+Odin get Fields API
+
+```
+
+```
